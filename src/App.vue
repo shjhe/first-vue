@@ -21,7 +21,7 @@
   }
 </style>
 <template>
-<div>
+  <div>
     <v-header :seller="seller"></v-header>
     <div class="tab">
       <div class="tab-item border-1px">
@@ -36,24 +36,30 @@
     </div>
     <router-view :seller="seller"></router-view>
 </div>
-
 </template>
-
 <script>
+import { urlParse } from 'common/js/utils';
 import header from './components/header/header';
 const ERR_OK = 0;
 export default {
   data() {
     return {
-      seller: {}
+      seller: {
+        id: (() => {
+          let queryParam = urlParse();
+          return queryParam && queryParam.id;
+        })()
+      }
     };
   },
   created() {
-    this.$http.get('/api/seller').then(
+    this.$http.get('/api/seller?id=' + this.seller.id).then(
       (req) => {
         req = req.body;
         if (req.errno === ERR_OK) {
-          this.seller = req.data;
+          // this.seller = req.data;
+          // 给对象扩展属性的方法  p1=返回对象 p2 p3为传入
+          this.seller = Object.assign({}, this.seller, req.data);
         }
       }
     );

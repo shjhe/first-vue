@@ -34,13 +34,14 @@
         <a v-link="{ path: '/seller' }">商家</a>
       </div>
     </div>
-    <router-view :seller="seller"></router-view>
+    <router-view :seller="seller" keep-alive></router-view>
 </div>
 </template>
 <script>
+import sllers from '../data.json';
 import { urlParse } from 'common/js/utils';
 import header from './components/header/header';
-const ERR_OK = 0;
+// const ERR_OK = 0;
 export default {
   data() {
     return {
@@ -53,16 +54,18 @@ export default {
     };
   },
   created() {
-    this.$http.get('/api/seller?id=' + this.seller.id).then(
-      (req) => {
-        req = req.body;
-        if (req.errno === ERR_OK) {
-          // this.seller = req.data;
-          // 给对象扩展属性的方法  p1=返回对象 p2 p3为传入
-          this.seller = Object.assign({}, this.seller, req.data);
-        }
-      }
-    );
+    // this.$http.get('/api/seller?id=' + this.seller.id).then(
+    //   (req) => {
+    //     req = req.body;
+    //     if (req.errno === ERR_OK) {
+    //       // this.seller = req.data;
+    //       // 给对象扩展属性的方法  p1=返回对象 p2 p3为传入
+    //       this.seller = Object.assign({}, this.seller, req.data);
+    //     }
+    //   }
+    // );
+    this.seller = Object.assign({}, this.seller, sllers.seller);
+    // console.log(this.seller);
   },
   components: {
     'v-header': header

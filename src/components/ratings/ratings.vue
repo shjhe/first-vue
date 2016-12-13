@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import sllers from '../../../data.json';
 import split from '../split/split';
 import BScroll from 'better-scroll';
 import star from 'components/star/star';
@@ -70,7 +71,7 @@ import ratingselect from '../ratingselect/ratingselect';
 // const POSITIVE = 0;
 // cont NEGATIVE = 1;
 const ALL = 2;
-const ERR_OK = 0;
+// const ERR_OK = 0;
 export default{
   data() {
     return {
@@ -103,16 +104,22 @@ export default{
     }
   },
   created() {
-    this.$http.get('/api/ratings').then((req) => {
-      req = req.body;
-      if (req.errno === ERR_OK) {
-        this.ratings = req.data;
-        this.$nextTick(() => {
-          this.scroll = new BScroll(this.$els.ratings, {
-            click: true
-          });
-        });
-      }
+    // this.$http.get('/api/ratings').then((req) => {
+    //   req = req.body;
+    //   if (req.errno === ERR_OK) {
+    //     this.ratings = req.data;
+    //     this.$nextTick(() => {
+    //       this.scroll = new BScroll(this.$els.ratings, {
+    //         click: true
+    //       });
+    //     });
+    //   }
+    // });
+    this.ratings = sllers.ratings;
+    this.$nextTick(() => {
+      this.scroll = new BScroll(this.$els.ratings, {
+        click: true
+      });
     });
   },
   filters: {

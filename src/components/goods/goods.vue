@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import sllers from '../../../data.json';
 import BScroll from 'better-scroll';
 import shopcart from '../shopcart/shopcart';
 import cartcontrol from '../cartcontrol/cartcontrol';
@@ -95,18 +96,23 @@ export default{
   },
   created() {
     this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
-    this.$http.get('/api/goods').then(
-      (req) => {
-        req = req.body;
-        if (req.errno === 0) {
-          this.goods = req.data;
-          this.$nextTick(() => {
-            this._initScroll();
-            this._calcaulateHeight();
-          });
-        }
-      }
-    );
+    // this.$http.get('/api/goods').then(
+    //   (req) => {
+    //     req = req.body;
+    //     if (req.errno === 0) {
+    //       this.goods = req.data;
+    //       this.$nextTick(() => {
+    //         this._initScroll();
+    //         this._calcaulateHeight();
+    //       });
+    //     }
+    //   }
+    // );
+    this.goods = sllers.goods;
+    this.$nextTick(() => {
+      this._initScroll();
+      this._calcaulateHeight();
+    });
   },
   methods: {
     _initScroll() {

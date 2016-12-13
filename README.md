@@ -1,5 +1,6 @@
 # 使用Vue.js@1.0制作仿饿了么网页
 
+> A Vue.js project
 ## Build Setup
 
 ``` bash
